@@ -27,7 +27,19 @@ describe('bcrypt', () => {
                 expect(compareREsult).toBeTruthy();
             });
     });
-    
+
+    it('can compare bad passwords', () => {
+        const password = 'password';
+
+        return hash(password)
+            .then(hashsedPassword => {
+                return bcrypt.compare('password123', hashsedPassword);
+            })
+            .then(compareREsult => {
+                expect(compareREsult).toBeFalsy();
+            });
+    });
 
 
-})
+
+});
