@@ -1,13 +1,20 @@
 require('dotenv').config();
-const { tokenize } = require('../../lib/utils/token');
+const { tokenize, untokenize } = require('../../lib/utils/token');
 
-describe('jwt token', () => {
-    it('can create a token', () => {
+const jwt = require('jsonwebtoken');
+
+xdescribe('jwt token', () => {
+    it('can untokenize a token', () => {
          const token = tokenize({
              _id: '1234',
              email: 'test@test.com'
          });
 
-    expect(token).toEqual(expect.any(String));
+         const obj = untokenize(token);
+
+    expect(token).toEqual({
+        _id: '1234',
+        email: 'test@test.com'
+    });
     });
 });
