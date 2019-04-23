@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const { hash }  = require('../../lib/utils/hash');
+const { hash, compare }  = require('../../lib/utils/hash');
 
 describe('bcrypt', () => {
     it('hashes a passord', () => {
@@ -38,6 +38,12 @@ describe('bcrypt', () => {
             .then(compareREsult => {
                 expect(compareREsult).toBeFalsy();
             });
+    });
+
+    it('hashes a password async', async() => {
+        const hashedPassword = await hash('password');
+        expect(hashedPassword).toEqual(expect.any(String));
+        expect(hashedPassword).not.toEqual('password');
     });
 
 
