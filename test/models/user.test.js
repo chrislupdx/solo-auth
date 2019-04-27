@@ -81,4 +81,17 @@ describe('User model', () => {
         });
     });
 
+    it('can create a Authtoken with db', () => {
+        const user = new User({
+            email: 'test@test.com',
+            passwordHash: 'randomHash'
+        });
+        const token = user.authToken();
+        const payload = untokenize(token);
+        expect(payload).toEqual({
+            _id: user._id.toString(),
+            email: 'test@test.com'
+        })
+    })
+
 });

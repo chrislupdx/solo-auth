@@ -2,21 +2,21 @@
 
 ## Create a User model
 
-* create `test/models/User.test.js` file
-* create a `lib/models/User.js` file
-* create a test `it('validates a good model', () => { }`
-  * create a new user with `const user = new User({ email: 'test@test.com' });`
-  * `expect(user.toJSON()).toEqual({ email: 'test@test.com' })`
-* create your user model
-  * users have an email and non-required passwordHash field
-* create another test `it('has a required email', () => { }`
-  * create a new user with `const user = new User({});`
+<!-- * create `test/models/User.test.js` file -->
+<!-- * create a `lib/models/User.js` file -->
+<!-- * create a test `it('validates a good model', () => { }` -->
+  <!-- * create a new user with `const user = new User({ email: 'test@test.com' });` -->
+  <!-- * `expect(user.toJSON()).toEqual({ email: 'test@test.com' })` -->
+<!-- * create your user model -->
+  <!-- * users have an email and non-required passwordHash field -->
+<!-- * create another test `it('has a required email', () => { }` -->
+  <!-- * create a new user with `const user = new User({});`
   * validate the user with `const errors = user.validateSync().errors`
   * expect to get some errors
-    * HINT: `console.log` errors and see what it looks like
+    * HINT: `console.log` errors and see what it looks like -->
 
 ## get a clear password on creating a new user
-
+<!-- 
 When we create a new user, we initially have to send in a clear, unencrypted, password.
 We never want to store this unencrypted password in our database, but we want to be able
 to pass an unencrypted password on user creation. We can do this by creating a "virtual"
@@ -29,11 +29,11 @@ field in our document. See here: [https://mongoosejs.com/docs/guide.html#virtual
 * **WRITE A TEST FIRST**
   * create a test `it('stores a _tempPassword')`
     * create a user using `new User({ email, password })`
-    * `expect(user._tempPassword).toEqual('password')`
+    * `expect(user._tempPassword).toEqual('password')` -->
 
 ## mongoose middleware
 
-Mongoose middleware are functions that get executed before or after some database
+<!-- Mongoose middleware are functions that get executed before or after some database
 event (e.g. before or after a document is saved). These are more typically called
 pre and post hooks. [Middleware](https://mongoosejs.com/docs/middleware.html)
 
@@ -42,13 +42,13 @@ pre and post hooks. [Middleware](https://mongoosejs.com/docs/middleware.html)
   * it should take the hashed password and store it as `this.passwordHash`
   * don't forget to invoke `next`
 * **WRITE A TEST FIRST**
-  * test that password hash is set after `user.save()`
+  * test that password hash is set after `user.save()` -->
 
 ## create a compare method
 
 Mongoose allows us to add custom methods to our models. These allow us to add custom functionality
 to our models. See [Methods](https://mongoosejs.com/docs/guide.html#methods)
-
+<!-- 
 * create a `compare` method on `userSchema`
   * `compare` should be a function that takes a password (in clear text)
   * `compare` should return true if the password matches `this.passwordHash`
@@ -57,7 +57,7 @@ to our models. See [Methods](https://mongoosejs.com/docs/guide.html#methods)
   * `const password = 'password'`
   * create a user `User.create({ email: 'test@test.com', password })`
   * then invoke the compare method (`user.compare`) with the password and expect true
-  * invoke the compare method with a bad password and expect false
+  * invoke the compare method with a bad password and expect false -->
 
 ## authToken instance method
 
@@ -87,7 +87,7 @@ See [Statics](https://mongoosejs.com/docs/guide.html#statics).
 We don't want to send the passwordHash in API requests for our user. Its bad practice.
 We can add a custom `toJSON` transformer to our `userSchema` to remove unwanted fields.
 Unfortunately, mongoose provides very little documentation about this feature. See this
-blog post though: [https://alexanderzeitler.com/articles/mongoose-tojson-toobject-transform-with-subdocuments/](https://alexanderzeitler.com/articles/mongoose-tojson-toobject-transform-with-subdocuments/)
+blog post though: [httauthTokenps://alexanderzeitler.com/articles/mongoose-tojson-toobject-transform-with-subdocuments/](https://alexanderzeitler.com/articles/mongoose-tojson-toobject-transform-with-subdocuments/)
 
 * create a `toJSON` transform function
   * inside the transform `delete ret.__v` and `delete ret.passwordHash`
